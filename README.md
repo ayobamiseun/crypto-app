@@ -1,1 +1,1 @@
-## crpto app
+## Crypto-App

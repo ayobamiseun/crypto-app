@@ -2,17 +2,23 @@ import React, {useState} from 'react';
 import { Select, Typography, Row, Col, Avatar, Card } from 'antd';
 import moment from 'moment';
 import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
+import { useGetCryptosQuery } from '../services/CryptoApi';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
+const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
 const News = ({simplified}) => {
-
-  const {data: cryptoNews} = useGetCryptoNewsQuery({newsCategory:'Cryptocurrency', count: simplified ? 6 : 12 })
+  const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
+  const { data } = useGetCryptosQuery(100);
+  const { data: cryptoNews } = useGetCryptoNewsQuery({newsCategory:'Cryptocurrency', count: simplified ? 6 : 12 });
   console.log(cryptoNews)
+ if(!cryptoNews?.value) return "Loading....";
+ 
+
   return (
     <Row gutter={[24, 24]}>
-      {/* {!simplified && (
+      {!simplified && (
         <Col span={24}>
           <Select
             showSearch
@@ -26,8 +32,9 @@ const News = ({simplified}) => {
             {data?.data?.coins?.map((currency) => <Option value={currency.name}>{currency.name}</Option>)}
           </Select>
         </Col>
-      )} */}
-      {cryptoNews.value.map((news, i) => (
+      )}
+      
+      {cryptoNews?.value?.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card hoverable className="news-card">
             <a href={news.url} target="_blank" rel="noreferrer">

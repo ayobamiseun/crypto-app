@@ -15,7 +15,6 @@ const CryptoDetails = () => {
   const [timeperiod, setTimeperiod] = useState('3y');
   const {data, isFetching} = useGetCryptoDetailsQuery(coinId)
   const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod });
-
   console.log("coinHis")
   console.log(coinHistory)
   const cryptoDetails = data?.data?.coin;

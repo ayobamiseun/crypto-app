@@ -21,21 +21,19 @@ export const cryptoApi = createApi({
         query: (coinId) => createRequest(`/coin/${coinId}`),
       }),
   
-      // Note: Change the coin price history endpoint from this - `coin/${coinId}/history/${timeperiod} to this - `coin/${coinId}/history?timeperiod=${timeperiod}`
-      getCryptoHistory: builder.query({
+  getCryptoHistory: builder.query({
         query: ({ coinId, timeperiod }) => createRequest(`coin/${coinId}/history?timePeriod=${timeperiod}`),
       }),
   
-      // Note: To access this endpoint you need premium plan
-    //   getExchanges: builder.query({
-    //     query: () => createRequest('/exchanges'),
-    //   }),
+      getExchanges: builder.query({
+        query: () => createRequest('/exchanges'),
+      }),
     }),
   });
   
   export const {
     useGetCryptosQuery,
     useGetCryptoDetailsQuery,
-    // useGetExchangesQuery,
+    useGetExchangesQuery,
     useGetCryptoHistoryQuery,
   } = cryptoApi;

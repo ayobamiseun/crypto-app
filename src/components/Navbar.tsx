@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC} from 'react';
 import { Button, Menu, Typography, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined } from '@ant-design/icons';
 
 import icon from '../images/logo.png';
 
-const Navbar = () => {
-  const [activeMenu, setActiveMenu] = useState(true);
-  const [screenSize, setScreenSize] = useState(undefined);
+const Navbar: FC = () => {
+  const [activeMenu, setActiveMenu] = React.useState<boolean>(true);
+  const [screenSize, setScreenSize] = React.useState<any>(undefined);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);

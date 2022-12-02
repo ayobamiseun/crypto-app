@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import millify from 'millify'
 import { Typography, Row, Col, Statistic  } from 'antd'
 import {Link} from 'react-router-dom';
@@ -7,8 +7,15 @@ import Cryptocurrencies from './Cryptocurrencies';
 import News from './News';
 import Loader from './Loader';
 
+
+interface Props {
+  data?: number | null,
+  globalStat?: any,
+  News: React.FC<React.PropsWithChildren<Props>>
+}
+
 const {Title }= Typography;
-const Homepage = () => {
+const Homepage:FC<Props> = () => {
   
     const {data, isFetching} = useGetCryptosQuery(10);
     const globalStat = data?.data?.stats;
@@ -35,6 +42,7 @@ const Homepage = () => {
         <Title level={2} className="home-title">Latest Crypto News</Title>
         <Title level={3}><Link to="/news">Show more</Link></Title>
       </div>
+        
       <News simplified />
     </>
   )

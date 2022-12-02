@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import millify from 'millify';
 import { Collapse, Row, Col, Typography, Avatar } from 'antd';
 import HTMLReactParser from 'html-react-parser';
@@ -8,8 +8,12 @@ import Loader from './Loader';
 
 const { Text } = Typography;
 const { Panel } = Collapse;
-
-const Exchanges = () => {
+ 
+interface Props {
+  Loader: any;
+}
+const Exchanges:FC<Props>= () => {
+  let useGetExchangesQuery:any ;
   const { data, isFetching } = useGetExchangesQuery();
   const exchangesList = data?.data?.exchanges;
  // Note: End point not working

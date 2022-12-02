@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{FC} from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Layout, Typography, Space } from 'antd';
 
 import { Exchanges, Homepage, News, Cryptocurrencies, CryptoDetails, Navbar } from './components';
 import './App.css';
 
-const App = () => (
+const App:FC = () => (
   <div className="app">
     <div className="navbar">
       <Navbar />

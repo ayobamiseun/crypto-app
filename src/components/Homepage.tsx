@@ -11,6 +11,7 @@ import Loader from './Loader';
 interface Props {
   data?: number | null,
   globalStat?: any,
+  simplified?:any,
   News: React.FC<React.PropsWithChildren<Props>>
 }
 
@@ -20,6 +21,7 @@ const Homepage:FC<Props> = () => {
     const {data, isFetching} = useGetCryptosQuery(10);
     const globalStat = data?.data?.stats;
     console.log(data);
+     // @ts-ignore
     if (isFetching || !globalStat) return <Loader />;
 
   return (
@@ -42,7 +44,7 @@ const Homepage:FC<Props> = () => {
         <Title level={2} className="home-title">Latest Crypto News</Title>
         <Title level={3}><Link to="/news">Show more</Link></Title>
       </div>
-        
+       
       <News simplified />
     </>
   )

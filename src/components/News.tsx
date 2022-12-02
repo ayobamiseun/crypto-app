@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, PropsWithChildren, ReactNode, useState} from 'react';
 import { Select, Typography, Row, Col, Avatar, Card } from 'antd';
 import moment from 'moment';
 import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
@@ -9,7 +9,17 @@ const { Text, Title } = Typography;
 const { Option } = Select;
 const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
-const News = ({simplified}) => {
+interface Props {
+  simplified : any,
+  option?:   undefined,
+  toLowerCase?: any,
+  input?:any,
+  children:React.ReactNode,
+  startOf: any
+ 
+}
+
+const News: FC<PropsWithChildren<Props>>  = ({simplified}): any  => {
   const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
   const { data } = useGetCryptosQuery(100);
   const { data: cryptoNews } = useGetCryptoNewsQuery({newsCategory:'Cryptocurrency', count: simplified ? 6 : 12 });
@@ -27,7 +37,8 @@ const News = ({simplified}) => {
             placeholder="Select a Crypto"
             optionFilterProp="children"
             onChange={(value) => setNewsCategory(value)}
-            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+               // @ts-ignore
+            filterOption={(input, option) => option?.children?.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           >
             <Option value="Cryptocurency">Cryptocurrency</Option>
             {data?.data?.coins?.map((currency) => <Option value={currency.name}>{currency.name}</Option>)}
@@ -49,7 +60,9 @@ const News = ({simplified}) => {
                   <Avatar src={news.provider[0]?.image?.thumbnail?.contentUrl || demoImage} alt="" />
                   <Text className="provider-name">{news.provider[0]?.name}</Text>
                 </div>
-                <Text>{moment(news.datePublished).startOf('ss').fromNow()}</Text>
+                <Text>  
+                {moment(news.datePublished).startOf('ss').fromNow()}
+                </Text>
               </div>
             </a>
           </Card>

@@ -5,9 +5,16 @@ import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOut
 
 import icon from '../images/logo.png';
 
-const Navbar: FC = () => {
-  const [activeMenu, setActiveMenu] = React.useState<boolean>(true);
-  const [screenSize, setScreenSize] = React.useState<any>(undefined);
+interface Props  {
+  active: boolean;
+  screenSize: any; 
+  setScreenSize: number | undefined | null | any; 
+
+}
+
+const Navbar: FC<Props> = ()  => {
+  const [activeMenu, setActiveMenu] = useState(true);
+  const [screenSize, setScreenSize] = useState<any | null>(undefined);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);

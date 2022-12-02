@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
@@ -9,8 +9,11 @@ import LineChart from './LineChart';
 import Loader from './Loader';
 const { Title, Text } = Typography;
 const { Option } = Select;
-
-const CryptoDetails = () => {
+ 
+interface Props {
+  DollarCircleOutlined: any,
+}
+const CryptoDetails:FC<Props> = () => {
   const {coinId} = useParams();
   const [timeperiod, setTimeperiod] = useState('3y');
   const {data, isFetching} = useGetCryptoDetailsQuery(coinId)
@@ -24,6 +27,7 @@ const CryptoDetails = () => {
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
   const stats = [
+
     { title: 'Price to USD', value: `$ ${cryptoDetails?.price && millify(cryptoDetails?.price)}`, icon: <DollarCircleOutlined /> },
     { title: 'Rank', value: cryptoDetails?.rank, icon: <NumberOutlined /> },
     { title: '24h Volume', value: `$ ${cryptoDetails?.volume && millify(cryptoDetails?.volume)}`, icon: <ThunderboltOutlined /> },

@@ -15,7 +15,9 @@ interface Props {
   toLowerCase?: any,
   input?:any,
   children:React.ReactNode,
-  startOf: any
+  startOf: any,
+  datePublished: any,
+ 
  
 }
 
@@ -24,6 +26,7 @@ const News: FC<PropsWithChildren<Props>>  = ({simplified}): any  => {
   const { data } = useGetCryptosQuery(100);
   const { data: cryptoNews } = useGetCryptoNewsQuery({newsCategory:'Cryptocurrency', count: simplified ? 6 : 12 });
   console.log(cryptoNews)
+   // @ts-ignore
  if(!cryptoNews?.value) return   <Loader/>;
  
 
@@ -61,6 +64,7 @@ const News: FC<PropsWithChildren<Props>>  = ({simplified}): any  => {
                   <Text className="provider-name">{news.provider[0]?.name}</Text>
                 </div>
                 <Text>  
+
                 {moment(news.datePublished).startOf('ss').fromNow()}
                 </Text>
               </div>
